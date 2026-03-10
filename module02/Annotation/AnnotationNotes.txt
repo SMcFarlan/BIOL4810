@@ -1,0 +1,11 @@
+Annotations Pipeline started 3/10/26
+
+Step 1) Filter contigs shorter than 500bp
+Tool: Filter FASTA
+Version: Galaxy Version 2.3
+Parameters: Filtered on sequence length; minimum length: 500bp
+
+Step 2) Quality assessment using checkm2
+Tool: checkm2
+Version: Galaxy Version 1.10+galaxy0
+Parameters: Model Options - output quality prediction for both models for each genome
