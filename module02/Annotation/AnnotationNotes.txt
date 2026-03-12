@@ -9,3 +9,45 @@ Step 2) Quality assessment using checkm2
 Tool: checkm2
 Version: Galaxy Version 1.10+galaxy0
 Parameters: Model Options - output quality prediction for both models for each genome
+
+Step 3) Genome annotation
+Tool: Prokka
+Version: Galaxy Version 1.14.6+galaxy1
+Parameters: Force GenBank Compliance - YES
+
+Step 4) Species ID
+Tool: BLAST
+Version: BLASTn (web)
+Parameters: rRNA/ITS
+
+Step 5) Build phylogenetic tree
+Tool: Type Strain Genome Server
+Version: https://tygs.dsmz.de/ (web)
+Parameters: Whole Proteome Tree
+
+Step 6) Visualize phylogenetic tree
+Tool: Interactive Tree of Life
+Version: v7 (web)
+Parameters: Display bootstraps as text
+
+Step 7) Average nucleotide identity
+Tool: ezbiocloud.net/tools/ani
+Version: website version
+Parameters: Ran two calculations using NCBI genome database starred entries for Salmonella typhimurium and Salmonella bongori. S. typhi. was the closest hit on BLAST, S. bongori was a distant relative. I pulled the FASTA files for each and compared them to my SPAdes filtered contigs from subject DNA to judge relatedness.
+
+
+
+
+
+Upload info-
+S1: cd [into directory on my computer]
+
+S2: git status
+
+S3: git add module02/Annotation
+
+S4: git status
+
+S5: git commit -m "message for commit details"
+
+S6: git push

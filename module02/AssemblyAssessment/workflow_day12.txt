@@ -1,0 +1,23 @@
+# Day 12 — Galaxy QC → Trim → Assembly → QUAST
+
+## Sample
+- sampleID: Thing1
+- raw data: a mystery presented by Dr.Vanlaar
+
+## Tools (Galaxy / usegalaxy.org)
+- FastQC: v0.74+galaxy1
+- fastp: v1..0+galaxy0
+- SPAdes: v4.2.0+galaxy0
+- QUAST: v5.3.0+galaxy1
+
+## Steps
+1. FastQC on raw reads → saved report as: Thing1_raw_forward_fastqc_2026-03-05.html
+2. fastp trimming (default settings) → saved report as: Thing1_fastp_trim_report_2026-03-05.html
+3. FastQC on trimmed reads → saved report as: Thing1_trim_forward_fastqc_2026-03-05.html
+4. SPAdes assembly on trimmed reads → saved contigs as: Thing1_SPAdes_2026-03-05.fasta
+5. QUAST evaluation on contigs → saved report as: Thing1_quast_pdf_report_2026-03-05.pdf
+
+## Notes / interpretation
+- I am really not sure what trimming did for me as far as cleaning up low quality reads, I think I did it wrong
+- QUAST was cool. N50 scores helped me decide the degree of fragmentation in my assembly. I.e., 50% of the assembly is made up of contigs that are ~19k bp or more.
+	- 4.8 billion bp assembly length, half of my contigs were ~19k. To me, this seems fragmented.
