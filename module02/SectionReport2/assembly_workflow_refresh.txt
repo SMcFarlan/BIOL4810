@@ -1,0 +1,139 @@
+Notes for Assembly an Assessment
+
+Step 0) Create a new history in Galaxy
+
+Step 1) Upload sequence files to Galaxy
+-Left side of page hit upload
+-Forward and reverse read .fastq files
+-Hit start
+
+Step 2) Combine the files into a paired list
+-
+
+Step 3) Assess read quality
+Tool: FastQC
+Version:fastQC(Galaxy Version 0.74+galaxy1)
+Parameters: default settings
+Files downloaded: forward and reverse raw .html files
+
+Step 4) Trimmed poor quality reads and adaptors
+Tool: fastp
+Version:fastp(Galaxy Version 1.1.0+galaxy0)
+Parameters: paired collection
+Files downloaded: fastp report in .html
+
+Step 5) Assess read quality of trimmed reads
+Tool: FastQC
+Version:fastQC(Galaxy Version 0.74+galaxy1)
+Parameters: default settings
+Files downloaded: forward and reverse trimmed .html files
+
+Step 6) Autobuild list from fastp trimmed outputs
+-Run in galaxy on history side, pairs
+
+Step 7) Assemble genome
+Tool: SPAdes
+Version:SPAdes(Galaxy Version 4.2.0+galaxy0)
+Parameters: default, run on fastp output pair
+Files downloaded: contgis file from SPAdes
+
+Step 8) Assess quality
+Tool: Quast
+Version:Quast(Galaxy Version 5.3.0+galaxy1)
+Parameters: .pdf output, otherwise default
+File assessed: SPAdes contigs
+Files downloaded: PDF report
+
+Step 9) Filter contigs shorter than 500bp
+Tool: Filter FASTA
+Version: Galaxy Version 2.3
+Parameters: Filtered on sequence length; minimum length: 500bp
+
+Step 10) Quality assessment using checkm2
+Tool: checkm2
+Version: Galaxy Version 1.10+galaxy0
+Parameters: Model Options - output quality prediction for both models for each genome
+
+Step 11) Genome annotation
+Tool: Prokka
+Version: Galaxy Version 1.14.6+galaxy1
+Parameters: Force GenBank Compliance - YES
+
+Step 12) Species ID
+Tool: BLAST
+Version: BLASTn (web)
+Parameters: rRNA/ITS
+
+Step 13) Build phylogenetic tree
+Tool: Type Strain Genome Server
+Version: https://tygs.dsmz.de/ (web)
+Parameters: Whole Proteome Tree
+
+Step 14) Visualize phylogenetic tree
+Tool: Interactive Tree of Life
+Version: v7 (web)
+Parameters: Display bootstraps as text
+
+Step 15) Average nucleotide identity
+Tool: ezbiocloud.net/tools/ani
+Version: website version
+Parameters: Ran two calculations using NCBI genome database starred entries for Salmonella typhimurium and Salmonella bongori. S. typhi. was the closest hit on BLAST, S. bongori was a distant relative. I pulled the FASTA files for each and compared them to my SPAdes filtered contigs from subject DNA to judge relatedness.
+
+Step 16) Search for antimicrobial resistance genes using Comprehensive Antibiotic Resistance Database, CARD
+Tool: https://card.mcmaster.ca/analyze/rgi
+Version: 4.0.1
+Parameter: default
+Upload: FilteredContigs.fasta
+File saved: Screenshot if few results, download table if more than fits on screen
+
+Step 17) Search for AMR genes using ResFinder
+Tool: https://genepi.food.dtu.dk/resfinder
+Version: 4.7.2
+Parameters: default
+Upload: FilteredContigs.fasta
+File saved: Screenshot results
+
+Step 18) Predict pathogenic potential
+Tool: https://genepi.food.dtu.dk/pathogenfinder
+Version: 0.6.0
+Parameters: default
+Upload: FilteredContigs.fasta
+
+Step 19) Look for secondary metabolite production
+Tool: https://antismash.secondarymetabolites.org/#!/start
+Version: 8
+Parameters: default
+Upload: FilteredContigs.fasta
+Download: screenshot of hits
+
+Step 20) Search for Prophage
+Tool: https://phaster.ca/
+Version: 4.3X
+Parameters: check "my input consists of multiple separate contigs"
+Upload: FilteredContigs.fasta
+Download: screenshot results
+
+Step 21) Look for pathogenicity islands
+Tool: https://www.pathogenomics.sfu.ca/islandviewer/
+Version: 4
+Parameters: click genome upload at top of the screen
+Upload: prokka GenBank file, prokka.genbank
+
+Step 22) Search for CRISPR regions
+Tool: https://crisprcas.i2bc.paris-saclay.fr/CrisprCasFinder/Index
+Version web
+Parameters: default
+Upload: FilteredContigs.fasta
+
+Upload info-
+S1: cd [into directory on my computer]
+
+S2: git status
+
+S3: git add module02/{FILENAME}
+
+S4: git status
+
+S5: git commit -m "message for commit details"
+
+S6: git push
