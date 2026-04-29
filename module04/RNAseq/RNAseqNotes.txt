@@ -1,0 +1,19 @@
+1. Download samples.csv file
+	Put into module 4
+
+2. Search up FastQC (Falco). Upload dataset collection Transcriptome. Default parameters. Run tool.
+
+3. Search up fastp. Change default parameters to 'paired collection'. Run Tool.
+
+4. Choose the same sequence to visualize after fastp. Compare these results to the same one after the FastQC. How many reads were removed?
+
+5. Search up Hisat2. Change the source for the reference genome to "use a genome from a history". Change is the single or paired-end library to "paired end dataset collection".
+
+6. Search up stringtie. Click on dataset collection (should be Hisat2 aligned reads). Default parameters. Run tool.
+
+7. Search stringtie merge. Drag your stringtie collection into the transcripts spot. Runtool.
+
+8. Search up GFFcompare.
+	-takes transcripts and compares them to genome annotation, GTF input for comparison should put in the stringtie merge, click dataset collection button again and add in the promicrosporangia file. Run tool.
+
+9. Search up Featurecounts. Add dataset collection (Hisat2). Change gene annotation file to a 'A GFF/GTF file in your history'. Change does the input have read pairs to 'yes, paired-end and count them as 1 single fragment'. Run tool.
