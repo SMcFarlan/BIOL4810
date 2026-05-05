@@ -17,3 +17,47 @@
 	-takes transcripts and compares them to genome annotation, GTF input for comparison should put in the stringtie merge, click dataset collection button again and add in the promicrosporangia file. Run tool.
 
 9. Search up Featurecounts. Add dataset collection (Hisat2). Change gene annotation file to a 'A GFF/GTF file in your history'. Change does the input have read pairs to 'yes, paired-end and count them as 1 single fragment'. Run tool.
+
+10. Click the eyeball icon located above the collections. Scroll down to where it says "feature counts on dataset__:counts" in the green collections. Click pencil and change the name to "Broth Replicate 1". You can tell it's a broth because the first row in the table says "CO_...".
+Change to Broth Replicate 2 and 3, then Plate Replicate 1, 2 and 3.
+
+11. Search up deseq2. Change the box that says 'specify a factor name'
+
+Filter Step, more before this. 
+column 3 and column 9 are interest columns
+keep any row with cds in C3
+FilterDataOnAnyColumn
+File = 2:promicrospora.gff
+following condition: c3=='CDS'
+Other areas default
+-Removes noncoding sequences in file set, gff file = annotation file
+
+Cut columns from table (Program: Cut)
+Only retain column 9, so cut other columns
+
+Tool: Convert delimiters to tab
+Convert all: semicolons (;)
+Splits up the column file into many individual columns
+
+Replace Text
+in a specific column: column 2
+find pattern : Parent=
+Replace: empty/no info/blank
+
+Cut columns
+All but column 8 and 2
+Cut columns: c2,c8
+
+Join two files
+cut dataset (columns 2 and 8)
+with
+top10upanddown tabular
+download this as final table
+
+Files Needed: 
+
+git status
+git add module04
+git status (check if wanted files turned green)
+git commit -m "module04 uploading"
+git push
