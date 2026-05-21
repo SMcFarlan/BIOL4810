@@ -1,0 +1,52 @@
+1- Combine .gz pairs into one collection.
+
+2- Assess quality across reads
+	dada2: plotQualityProfile Galaxy Version 1.38.0+galaxy0
+		Gives a visual representation of read quality, tells us how we need to trim. R- 160bp F- 125bp
+
+3- Trim low quality segments of reads
+	dada2: filterAndTrim Galaxy Version 1.38.0+galaxy0
+		Filters out low quality reads and truncates at our set points, Forward: 125bp Reverse: 160bp
+
+4- filterAndTrim produces a single collection but we need to unpair forward and reverse reads
+	Unzip collection Galaxy Version 1.0.0
+		Splits up forward and reverse read sets into two collections for next steps
+
+5- We need to differentiate between sequencing errors and true biological variants
+	dada2: learnErrors Galaxy Version 1.38.0+galaxy0
+		Simulates sequencing error rates to determine if variation is biological or done in error
+		Do this for both the forward and reverse collections that just got unzipped
+		Make sure to tag or rename outputs to differentiate between forward and reverse read sets
+
+6- Now we must remove those determined errors
+	dada2: dada Galaxy Version 1.38.0+galaxy0
+		Uses the learnErrors predictions to cut away sequencing errors so that variants are biological variants
+
+7- Cleaned up forward and reverse collections now need to be re-paired
+	dada2: mergePairs Galaxy Version 1.38.0+galaxy0
+		Takes dada outputs both forward and reverse, and the forward and reverse read collections and merges them back together
+		We are left with a full overlapping sequence for each amplicon
+
+8- We have all of our sequences, now we need to compile them into one table
+	dada2: makeSequenceTable Galaxy Version 1.38.0+galaxy0
+		Compiles merged sequences into one table for analysis
+
+9- PCR can result in bad combinations called chimeras where two unrelated sequences are merged, they need to be removed
+	dada2: removeBimeraDenovo Galaxy Version 1.38.0+galaxy0
+		Sequences produced by PCR error are pulled from our table, giving us a cleaner representation of the true sequences collected
+
+10- With a cleaned and combined table, we can now judge taxonomy of our sequences
+	dada2: assignTaxonomy and addSpecies Galaxy Version 1.38.0+galaxy0
+	Use built in reference data set: Silva version 138
+		Assigns most likely taxonomic designation that can be confidently ascribed to each sequence
+
+11- Visualization works well with phyoseq but we need to convert our dada2 output into something it can understand
+	Create phyloseq object Galaxy Version 1.54.0+galaxy0
+	Don't forget to include your metadata file
+		Converts dada2 outputs into phyloseq object for phyloseq visualization
+
+12- Things got so wonky that I decided to abort phyloseq visualizations. My assignTaxonomy predictions just don't make sense and I either did something wrong or my sequences were too short for strong predictions.
+
+Results
+
+Things got weird, I felt good all the way up until assignTaxonomy hit me. I believe I have either chopped too much of my sequences in the filter+trim step early on (the most likely option) or my dataset is made up of eukaryotic DNA(less likely option). Still, I found it interesting to get the hits that I got when reference list was swapped off of Silva 138 over to the 18S ribosomal reference set for eukaryotes. If I did this over again, I would chop less and accept lower quality segments at the end of my forward reads, probably match my reverse read length around 160bp. It is very unlikely to me that a Tunisian flatworm(Schmidtea mediterranea) was living on a dry California foothill wildflower's surface. 

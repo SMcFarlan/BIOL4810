@@ -5,7 +5,7 @@
 
 3. Search up fastp. Change default parameters to 'paired collection'. Run Tool.
 
-4. Choose the same sequence to visualize after fastp. Compare these results to the same one after the FastQC. How many reads were removed?
+4. Choose the same sequence to visualize after fastp. Compare these results to the same one after the Falco. How many reads were removed? (97.185204% retention)
 
 5. Search up Hisat2. Change the source for the reference genome to "use a genome from a history". Change is the single or paired-end library to "paired end dataset collection".
 
@@ -28,51 +28,51 @@ Select 'output normalised counts.' Run too
 ⁃ ⁃ Ha: change in gene expression between broth and plate.
 
 
-Step 12.Search up "Filter data on any column using simple expressions.' Select the
+12.Search up "Filter data on any column using simple expressions.' Select the
 Deseg? dataset collection. Change 'with the following conditions' to 'c7<0.05'.
 Run tool.
 
-Step 13.Search up "Filter data on any column using simple expressions.' Select the
+13.Search up "Filter data on any column using simple expressions.' Select the
 dataset collection just produced by the previous filter (249: Filter on dataset 246).
 Change with the following conditions' to 'abs(c3)>1'. Run tool.
 
-Step 14.Open an empty text file. Type GenelD then click tab button on keyboard.
+14.Open an empty text file. Type GenelD then click tab button on keyboard.
 GeneID Base mean log2(FC) StdErr WaldStat P-Value
 P-adj
 
-Step 15.Upload and click Paste/fetch data. Copy and Paste the above into the data section. Title
+15.Upload and click Paste/fetch data. Copy and Paste the above into the data section. Title
 it header. Select tabular. Start.
 
-Step 16. Search up ‘concatenate multiple datasets or collections’ the header file should
+16. Search up ‘concatenate multiple datasets or collections’ the header file should
 automatically appear under the concatenate dataset. Run tool. Download.
 
-Step 17. Search up ‘volcano plot’. Insert the differential gene expression dataset
+17. Search up ‘volcano plot’. Insert the differential gene expression dataset
 collection. In FDR, select column 7. In p-value, select column 6. In the log, select
 columns 3. In labels column number, select column 1.
 
-Step 18. Open Deseq results with excel. Press Ctrl A to select all the data. Go to Data -> Sort -> Click the up and down arrows next to 'value' and click log2 (FC). Delete all the values between the top 10 and bottom 10 values. Download. Upload into Galaxy.
+18. Open Deseq results with excel. Press Ctrl A to select all the data. Go to Data -> Sort -> Click the up and down arrows next to 'value' and click log2 (FC). Delete all the values between the top 10 and bottom 10 values. Download. Upload into Galaxy.
 
-Step 19. Change the Top10UpandDownFiles to a tabular file.
+19. Change the Top10UpandDownFiles to a tabular file.
 
-Step 20. Search up 'Join two datasets side by side on a specific field.' The first file should be the Top10UpandDown. The second file should be the normalized count data. Select 'Yes' to keep the header lines. Run too.
+20. Search up 'Join two datasets side by side on a specific field.' The first file should be the Top10UpandDown. The second file should be the normalized count data. Select 'Yes' to keep the header lines. Run too.
 
-Step 21. Search up 'cut columns' from a table. Change 'cut columns' to 'c8-c14'. Run tool.
+21. Search up 'cut columns' from a table. Change 'cut columns' to 'c8-c14'. Run tool.
 
-Step 22. Search up heatmap2. Under data transformation, select 'Log2(value+1) transform my data. Change the color (if you want).
+22. Search up heatmap2. Under data transformation, select 'Log2(value+1) transform my data. Change the color (if you want).
 
-Step 23. Search up "filter data on any column using simple expressions." Select the promicromonspora.gff file. Under "with the following condition," put 'c3='CDS'. Run tool.
+23. Search up "filter data on any column using simple expressions." Select the promicromonspora.gff file. Under "with the following condition," put 'c3='CDS'. Run tool.
 -removes everything from the gff that is not a coding sequence.
 
-Step 24. Search up "cut columns from the table." Under cut columns, change it to c9.
+24. Search up "cut columns from the table." Under cut columns, change it to c9.
 
-Step 25. Search 'cut delimiters to TAB'. Select 'semicolons' under where it says "convert all."
+25. Search 'cut delimiters to TAB'. Select 'semicolons' under where it says "convert all."
 
-Step 26. Search up 'replace text in a specific column.' In 'in column,' select 'column 2.' Under find pattern, put "Parent=" Run tool.
+26. Search up 'replace text in a specific column.' In 'in column,' select 'column 2.' Under find pattern, put "Parent=" Run tool.
 -column 2 has the gene name, column 8 had the gene function
 
-Step 27. Search up 'cut columns from the table.' Under cut columns, put 'c2,c8'. Run tool.
+27. Search up 'cut columns from the table.' Under cut columns, put 'c2,c8'. Run tool.
 
-Step 28. Search up 'join two datasets on a specific field'. The first dataset should be the dataset you just cut. The second dataset should be the Top10UpandDown (tabular file). Select 'yes' for keep header lines.
+28. Search up 'join two datasets on a specific field'. The first dataset should be the dataset you just cut. The second dataset should be the Top10UpandDown (tabular file). Select 'yes' for keep header lines.
 
 Filter Step, more before this. 
 column 3 and column 9 are interest columns
