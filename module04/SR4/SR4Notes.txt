@@ -60,12 +60,12 @@ columns 3. In labels column number, select column 1.
 
 22. Search up heatmap2. Under data transformation, select 'Log2(value+1) transform my data. Change the color (if you want).
 
-23. Search up "filter data on any column using simple expressions." Select the promicromonspora.gff file. Under "with the following condition," put 'c3='CDS'. Run tool.
+23. Search up "filter data on any column using simple expressions." Select the promicromonspora.gff file. Under "with the following condition," put 'c3=='CDS'. Run tool.
 -removes everything from the gff that is not a coding sequence.
 
 24. Search up "cut columns from the table." Under cut columns, change it to c9.
 
-25. Search 'cut delimiters to TAB'. Select 'semicolons' under where it says "convert all."
+25. Search 'convert delimiters to TAB'. Select 'semicolons' under where it says "convert all."
 
 26. Search up 'replace text in a specific column.' In 'in column,' select 'column 2.' Under find pattern, put "Parent=" Run tool.
 -column 2 has the gene name, column 8 had the gene function
@@ -73,6 +73,10 @@ columns 3. In labels column number, select column 1.
 27. Search up 'cut columns from the table.' Under cut columns, put 'c2,c8'. Run tool.
 
 28. Search up 'join two datasets on a specific field'. The first dataset should be the dataset you just cut. The second dataset should be the Top10UpandDown (tabular file). Select 'yes' for keep header lines.
+
+
+Misc Notes
+
 
 Filter Step, more before this. 
 column 3 and column 9 are interest columns
